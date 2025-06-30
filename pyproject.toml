@@ -9,6 +9,7 @@ dependencies = [
     "isort>=6.0.1",
     "jupyterlab>=4.4.3",
     "langchain>=0.3.25",
+    "langchain-chroma>=0.2.4",
     "langchain-community>=0.3.25",
     "langchain-core>=0.3.65",
     "langchain-openai>=0.3.24",
