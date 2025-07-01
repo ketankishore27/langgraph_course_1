@@ -1,5 +1,8 @@
 import sys
-sys.path.append("/Users/A118390615/Library/CloudStorage/OneDrive-DeutscheTelekomAG/Projects/COE_Projects/langgraph_course_1/agentic_rag")
+
+sys.path.append(
+    "/Users/A118390615/Library/CloudStorage/OneDrive-DeutscheTelekomAG/Projects/COE_Projects/langgraph_course_1/agentic_rag"
+)
 
 from state import customGraph
 from chains.retrieval_grader import retrieval_grader
@@ -17,7 +20,9 @@ def grade_documents(state: customGraph):
     websearch_flag = False
 
     for doc in docs:
-        relevant_flag = retrieval_grader.invoke({"documents": doc, "question": question}).binary_score
+        relevant_flag = retrieval_grader.invoke(
+            {"documents": doc, "question": question}
+        ).binary_score
         if relevant_flag == "yes":
             filtered_msgs.append(doc)
         else:
@@ -27,7 +32,12 @@ def grade_documents(state: customGraph):
     if len(docs) == 0:
         websearch_flag = True
 
-    return {"question" : question, "documents" : filtered_msgs, "web_search": websearch_flag}
+    return {
+        "question": question,
+        "documents": filtered_msgs,
+        "web_search": websearch_flag,
+    }
+
 
 if __name__ == "__main__":
     state = {}

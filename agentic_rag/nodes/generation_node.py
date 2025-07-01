@@ -1,8 +1,12 @@
 import sys
-sys.path.append("/Users/A118390615/Library/CloudStorage/OneDrive-DeutscheTelekomAG/Projects/COE_Projects/langgraph_course_1/agentic_rag")
+
+sys.path.append(
+    "/Users/A118390615/Library/CloudStorage/OneDrive-DeutscheTelekomAG/Projects/COE_Projects/langgraph_course_1/agentic_rag"
+)
 
 from chains.generation import generation_chain
 from state import customGraph
+
 
 def generation_node(state: customGraph):
     """

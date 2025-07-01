@@ -4,6 +4,7 @@ from typing import List
 from tool_executor import executor_node
 from dotenv import load_dotenv
 from chains import chain_responder_initial, chain_revisor, chain_summary
+
 load_dotenv(override=True)
 
 builder = MessageGraph()
@@ -16,27 +17,27 @@ builder.add_edge(START, "first_responder")
 builder.add_edge("first_responder", "tool_node")
 builder.add_edge("tool_node", "revisor_node")
 
+
 def should_summarize_or_continue(state: List[BaseMessage]) -> str:
     if sum([isinstance(state_msg, ToolMessage) for state_msg in state]) < 2:
         return "should_continue"
 
     return "should_summarize"
 
-builder.add_conditional_edges("revisor_node", should_summarize_or_continue, 
-                              {"should_continue": "tool_node", "should_summarize": END})
+
+builder.add_conditional_edges(
+    "revisor_node",
+    should_summarize_or_continue,
+    {"should_continue": "tool_node", "should_summarize": END},
+)
 
 # builder.add_edge("summary_node", END)
 
 flow = builder.compile()
-flow.get_graph().draw_mermaid_png(output_file_path = "flow.png")
+flow.get_graph().draw_mermaid_png(output_file_path="flow.png")
 
 response = flow.invoke(
     "Write about AI-Powered SOC / autonomous soc problem domain, list startups that do that and raised capital"
 )
 
 print(response)
-
-
-
-
-

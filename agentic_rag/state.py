@@ -1,7 +1,7 @@
 from typing import TypedDict, List
 
-class customGraph(TypedDict):
 
+class customGraph(TypedDict):
     """
     Represents the state of the graph
 
